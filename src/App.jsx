@@ -1,11 +1,11 @@
-function App() {
-  
+import Body from "./components/Body";
 
+function App() {
   return (
-    <div className="bg-red-600">
-      Hello World!!
+    <div>
+      <Body />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
