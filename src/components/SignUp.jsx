@@ -3,21 +3,41 @@ import Header from "./Header";
 import PlanCard from "./PlanCard";
 import ReasonCard from "./ReasonCard";
 import { BGIMG_URL } from "../utils/constants";
+import { auth } from "../utils/firebase";
 import {
   Reason1_URL,
   Reason2_URL,
   Reason3_URL,
   Reason4_URL,
 } from "../utils/constants";
-import { Link, Route } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useRef, useState } from "react";
+import { checkValidData } from "../utils/validate";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const SignUp = () => {
-  function handleSubmit(e) {
-    e.preventDefault();
-    alert(
-      "This feature is currently under development. Please try again later."
-    );
-  }
+  const navigate = useNavigate();
+  const email = useRef(null);
+  const password = useRef(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  const handleClick = () => {
+    const msg = checkValidData(email.current.value, password.current.value);
+    setErrorMsg(msg);
+    if (msg) return;
+
+    createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        navigate("/browse");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setErrorMsg(errorMessage + "-" + errorCode);
+      });
+  };
 
   return (
     <div className="relative w-full h-screen overflow-x-hidden">
@@ -27,7 +47,7 @@ const SignUp = () => {
 
       <div className="relative flex justify-between items-center p-4">
         <Header />
-        <button className="absolute top-8 right-10 bg-white rounded-full w-20 h-8 text-black font-semibold text-center shadow-md hover:bg-white/80 cursor-pointer">
+        <button className="absolute top-8 right-10 z-10 bg-white rounded-full w-20 h-8 text-black font-semibold text-center shadow-md hover:bg-white/80 cursor-pointer">
           <Link to="/Login">Sign In</Link>
         </button>
       </div>
@@ -52,16 +72,23 @@ const SignUp = () => {
             Ready to watch? Enter your email to create or restart your
             membership.
           </h6>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={(e) => e.preventDefault()}>
             <input
-              type="email"
-              className="absolute text-gray-800 p-3.5 top-100 h-14 w-85 text-lg left-79 rounded-4xl bg-white opacity-50 required"
-              placeholder="Email address"
-              required
+              ref={email}
+              type="text"
+              className="absolute text-gray-800 p-3.5 top-98 h-12 w-85 text-lg left-79 rounded-4xl bg-white opacity-50 required"
+              placeholder="Email Address"
             ></input>
+            <input
+              ref={password}
+              type="text"
+              className="absolute text-gray-800 p-3.5 top-111 h-12 w-85 text-lg left-79 rounded-4xl bg-white opacity-50 required"
+              placeholder="Password"
+            ></input>
+            <p className="absolute text-red-500 top-123 left-105">{errorMsg}</p>
             <button
-              className="absolute text-white top-100 h-14 w-55 text-lg right-99 rounded-4xl bg-red-700 hover:bg-red-800 cursor-pointer"
-              type="submit"
+              className="absolute text-white top-104 h-14 w-55 text-lg right-99 rounded-4xl bg-red-700 hover:bg-red-800 cursor-pointer"
+              onClick={handleClick}
             >
               Get Started
             </button>

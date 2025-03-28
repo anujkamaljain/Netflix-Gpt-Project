@@ -1,11 +1,39 @@
 import React from "react";
 import Header from "./Header";
 import { BGIMG_URL } from "../utils/constants";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useRef } from "react";
+import { checkValidData } from "../utils/validate";
+import { signInWithEmailAndPassword  } from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const Login = () => {
   const [expanded, setExpanded] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(null);
+  const navigate = useNavigate();
+
+  const email = useRef(null);
+  const password = useRef(null);
+
+  const handleClick = () => {
+    const msg = checkValidData(email.current.value, password.current.value);
+    setErrorMsg(msg);
+    if (msg) return;
+
+    signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        navigate("/browse");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        if(errorMessage === "Firebase: Error (auth/invalid-credential)." && errorCode === "auth/invalid-credential"){
+          setErrorMsg("Invalid credentials");
+        }
+      });
+  };
 
   return (
     <div className="relative h-screen w-screen">
@@ -21,30 +49,38 @@ const Login = () => {
       </div>
 
       <div className="absolute inset-0 flex justify-center items-center">
-        <form className="bg-black/70 bg-opacity-70 p-10 w-[400px] text-center">
+        <form
+          className="bg-black/70 bg-opacity-70 p-10 w-[400px] text-center"
+          onSubmit={(e) => e.preventDefault()}
+        >
           <h2 className="text-white font-bold text-3xl mb-6">Sign In</h2>
 
           <input
+            ref={email}
             type="text"
-            placeholder="Email or mobile number"
+            placeholder="Email Address"
             className="p-3 w-full border border-gray-600 bg-black/5 text-white rounded-md mb-4"
           />
 
           <input
+            ref={password}
             type="password"
             placeholder="Password"
             className="p-3 w-full border border-gray-600 bg-black/5 text-white rounded-md mb-6"
           />
-
-          <button className="w-full bg-red-700 hover:bg-red-800 text-white py-3 rounded-md font-semibold">
+          <p className="text-red-500">{errorMsg}</p>
+          <button
+            className="w-full bg-red-700 hover:bg-red-800 text-white py-3 rounded-md font-semibold cursor-pointer"
+            onClick={handleClick}
+          >
             Sign In
           </button>
-          <p className="text-gray-400 text-md text-start mt-6">
+          <h1 className="text-gray-400 text-md text-start mt-6">
             New to Netflix?{" "}
             <Link to="/" className="inline-block">
               <p className="text-white font-semibold">Sign Up Now</p>
             </Link>
-          </p>
+          </h1>
           <p className="text-gray-400 text-xs mt-5 text-start mb-3">
             This page is protected by Google reCAPTCHA to ensure you're not a
             bot.
