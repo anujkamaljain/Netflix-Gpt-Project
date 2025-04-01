@@ -2,20 +2,45 @@ import { Logo1_URL } from "../utils/constants";
 import { auth } from "../utils/firebase";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch  } from "react-redux";
+import { useEffect } from "react";
+import { addUser, removeUser } from "../utils/userSlice";
+import { onAuthStateChanged } from "firebase/auth";
+import { HEADERICON_URL } from "../utils/constants";
 
 const Header = () => {
+
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
   const user = useSelector(store => store.user);
 
   const handleClick = () => {
-    signOut(auth).then(() => {
-     navigate("/");
-    }).catch((error) => {
+    signOut(auth).then(() => {})
+    .catch((error) => {
       console.log(error);
     });
   }
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const {uid, email} = user;
+        dispatch(addUser({uid:uid, email:email}));
+        navigate("/browse");
+      } else {
+        dispatch(removeUser());
+        if (window.location.pathname !== "/Login") {
+          navigate("/");
+        }else{
+          navigate("/Login");
+        }
+      }
+    });
+
+    return () => {unsubscribe();}
+  }, []);
+
 
   return (
     <div className="absolute top-4 z-10 w-full flex items-center justify-between">
@@ -26,7 +51,7 @@ const Header = () => {
       />
       {user && <div className="flex items-center justify-around w-1/9 p-2 ">
         <img
-          src="https://occ-0-6247-2186.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABTZ2zlLdBVC05fsd2YQAR43J6vB1NAUBOOrxt7oaFATxMhtdzlNZ846H3D8TZzooe2-FT853YVYs8p001KVFYopWi4D4NXM.png?r=229"
+          src= {HEADERICON_URL}
           alt="usericon"
           className="w-12 h-12"
         />

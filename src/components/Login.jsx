@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./Header";
 import { BGIMG_URL } from "../utils/constants";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState, useRef } from "react";
 import { checkValidData } from "../utils/validate";
 import { signInWithEmailAndPassword  } from "firebase/auth";
@@ -10,7 +10,6 @@ import { auth } from "../utils/firebase";
 const Login = () => {
   const [expanded, setExpanded] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
-  const navigate = useNavigate();
 
   const email = useRef(null);
   const password = useRef(null);
@@ -24,7 +23,6 @@ const Login = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
-        navigate("/browse");
       })
       .catch((error) => {
         const errorCode = error.code;
