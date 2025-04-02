@@ -56,3 +56,9 @@ export const Supported_Langs = [
   { identifier: "hindi", name: "Hindi" },
   { identifier: "spanish", name: "Spanish" },
 ];
+
+export const OPENAI_KEY = "AIzaSyDna0FzcQtijWXrZ4JCbm_fUQlz51ga3w4";
+
+export const GPTQuery = "Assume you are a movie recommendation system.Suggest some movies for the query :";
+
+export const GPTQuery2 = ". Only give me names of 5 movies, comma separated like the example result given ahead. Example result: Gadar, Don, Sholay, Golmal, Jawan";

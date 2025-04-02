@@ -16,6 +16,7 @@ const Header = () => {
 
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
+  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
 
   const handleClick = () => {
     signOut(auth)
@@ -27,7 +28,7 @@ const Header = () => {
 
   const handleLangChange = (e) => {
     dispatch(changeLanguage(e.target.value));
-  }
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -63,11 +64,18 @@ const Header = () => {
       />
       {user && (
         <div className="flex items-center justify-around md:w-62 w-52 mr-1 mt-2 overflow-x-hidden ">
-          <select className="bg-black/80 text-white p-1 rounded-lg mr-0.5 cursor-pointer" onChange={handleLangChange}>
-            {Supported_Langs.map((lang) => (
-              <option key={lang.identifier} value={lang.identifier}>{lang.name}</option>
-            ))}
-          </select>
+          {showGptSearch && (
+            <select
+              className="bg-black/80 text-white p-1 rounded-lg mr-0.5 cursor-pointer"
+              onChange={handleLangChange}
+            >
+              {Supported_Langs.map((lang) => (
+                <option key={lang.identifier} value={lang.identifier}>
+                  {lang.name}
+                </option>
+              ))}
+            </select>
+          )}
           <img
             src={HEADERICON_URL}
             alt="usericon"
@@ -84,7 +92,7 @@ const Header = () => {
               onClick={handleGPTSearchclick}
               className="mt-1 bg-red-600 text-white font-semibold text-center rounded-full md:w-24 w-20 md:h-8 h-6 cursor-pointer hover:bg-red-600/80 md:text-base text-sm"
             >
-              GPT Search
+              {showGptSearch ? "HomePage" : "GPT Search" }
             </button>
           </div>
         </div>

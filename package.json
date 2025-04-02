@@ -11,10 +11,13 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.0",
+    "@openai/openai": "npm:@jsr/openai__openai@^4.91.1",
     "@tailwindcss/vite": "^4.0.15",
     "firebase": "^11.5.0",
     "lucide-react": "^0.486.0",
     "netflix-gpt": "file:",
+    "openai": "^4.91.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-redux": "^9.2.0",
