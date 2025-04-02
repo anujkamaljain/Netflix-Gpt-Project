@@ -8,6 +8,8 @@ import { addUser, removeUser } from "../utils/userSlice";
 import { onAuthStateChanged } from "firebase/auth";
 import { HEADERICON_URL } from "../utils/constants";
 import { toggleGptSearchView } from "../utils/GPTSlice.js";
+import { Supported_Langs } from "../utils/constants";
+import { changeLanguage } from "../utils/configSlice.js";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -22,6 +24,10 @@ const Header = () => {
         console.log(error);
       });
   };
+
+  const handleLangChange = (e) => {
+    dispatch(changeLanguage(e.target.value));
+  }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -56,7 +62,12 @@ const Header = () => {
         className="lg:w-44 md:w-32 w-24 mt-4"
       />
       {user && (
-        <div className="flex items-center justify-around md:w-45 w-32 mr-1 mt-2 overflow-x-hidden ">
+        <div className="flex items-center justify-around md:w-62 w-52 mr-1 mt-2 overflow-x-hidden ">
+          <select className="bg-black/80 text-white p-1 rounded-lg mr-0.5 cursor-pointer" onChange={handleLangChange}>
+            {Supported_Langs.map((lang) => (
+              <option key={lang.identifier} value={lang.identifier}>{lang.name}</option>
+            ))}
+          </select>
           <img
             src={HEADERICON_URL}
             alt="usericon"
