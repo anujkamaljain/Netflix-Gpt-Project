@@ -1,10 +1,10 @@
 import React from "react";
 import Header from "./Header";
-import { BGIMG_URL } from "../utils/constants";
+import { BGIMG_URL, Logintxt1_URL, Logintxt2_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
 import { useState, useRef } from "react";
 import { checkValidData } from "../utils/validate";
-import { signInWithEmailAndPassword  } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
 
 const Login = () => {
@@ -19,7 +19,11 @@ const Login = () => {
     setErrorMsg(msg);
     if (msg) return;
 
-    signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+    signInWithEmailAndPassword(
+      auth,
+      email.current.value,
+      password.current.value
+    )
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
@@ -27,7 +31,10 @@ const Login = () => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        if(errorMessage === "Firebase: Error (auth/invalid-credential)." && errorCode === "auth/invalid-credential"){
+        if (
+          errorMessage === "Firebase: Error (auth/invalid-credential)." &&
+          errorCode === "auth/invalid-credential"
+        ) {
           setErrorMsg("Invalid credentials");
         }
       });
@@ -80,17 +87,12 @@ const Login = () => {
             </Link>
           </h1>
           <p className="text-gray-400 text-xs mt-5 text-start mb-3">
-            This page is protected by Google reCAPTCHA to ensure you're not a
-            bot.
+            {Logintxt1_URL}
           </p>
 
           {expanded && (
             <p className="text-gray-400 text-xs text-start mt-5">
-              The information collected by Google reCAPTCHA is subject to the
-              Google Privacy Policy and Terms of Service, and is used for
-              providing, maintaining, and improving the reCAPTCHA service and
-              for general security purposes (it is not used for personalised
-              advertising by Google).
+              {Logintxt2_URL}
             </p>
           )}
 

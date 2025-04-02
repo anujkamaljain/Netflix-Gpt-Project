@@ -28,4 +28,25 @@ export const API_OPTIONS = {
   },
 };
 
+export const Logintxt1_URL =
+  "This page is protected by Google reCAPTCHA to ensure you're not a bot.";
+
+export const Logintxt2_URL =
+  "The information collected by Google reCAPTCHA is subject to the Google Privacy Policy and Terms of Service, and is used for providing, maintaining, and improving the reCAPTCHA service and for general security purposes (it is not used for personalised advertising by Google).";
+
 export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w500";
+
+export const NowPlayingMovies_URL =
+  "https://api.themoviedb.org/3/movie/now_playing?page=1";
+
+export const PopularMovies_URL =
+  "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1";
+
+export const TopRatedMovies_URL =
+  "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1";
+
+export const TrendingMovies_URL =
+  "https://api.themoviedb.org/3/trending/movie/day?language=en-US";
+
+export const UpcomingMovies_URL =
+  "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1";
