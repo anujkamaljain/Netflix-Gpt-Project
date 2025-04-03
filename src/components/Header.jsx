@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { addUser, removeUser } from "../utils/userSlice";
 import { onAuthStateChanged } from "firebase/auth";
 import { HEADERICON_URL } from "../utils/constants";
-import { toggleGptSearchView } from "../utils/GPTSlice.js";
+import { removeGeminiMovieResult, toggleGptSearchView } from "../utils/GPTSlice.js";
 import { Supported_Langs } from "../utils/constants";
 import { changeLanguage } from "../utils/configSlice.js";
 
@@ -53,6 +53,9 @@ const Header = () => {
 
   const handleGPTSearchclick = () => {
     dispatch(toggleGptSearchView());
+    if(!showGptSearch){
+      dispatch(removeGeminiMovieResult());
+    }
   };
 
   return (

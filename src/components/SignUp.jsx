@@ -46,7 +46,7 @@ const SignUp = () => {
         </button>
       </div>
 
-      <div className="relative flex flex-col items-center mt-12 px-4 text-center text-white">
+      <div className="relative flex flex-col items-center mt-12 px-4 text-center text-white overflow-x-hidden">
         <img
           src={BGIMG_URL}
           alt="Netflix Originals"

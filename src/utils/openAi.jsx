@@ -1,6 +1,9 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { OPENAI_KEY } from "./constants";
+import { useSelector } from "react-redux";
 
-const ai = new GoogleGenerativeAI(OPENAI_KEY);
+const useAI = () => {
+  const apiKey = useSelector((store) => store.user.API_KEY);
+  return new GoogleGenerativeAI(apiKey);
+};
 
-export default ai;
+export default useAI;

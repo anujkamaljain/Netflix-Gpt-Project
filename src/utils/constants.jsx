@@ -24,7 +24,7 @@ export const API_OPTIONS = {
   headers: {
     accept: "application/json",
     Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1OTIwMTM0M2E4MjFhYzQyMzc0NDNjOTkwOTc4NWEzYSIsIm5iZiI6MTc0MzI1NTc3OS45NTEsInN1YiI6IjY3ZTdmOGUzMGU4ZWU2NzgxNTY3YmVhOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.kgpU_a13hMZhRqWWdGkl6qhBtZyoYcqdS9pWVb6SQtM",
+      "Bearer "+ import.meta.env.VITE_TMDBAPI_KEY ,
   },
 };
 
@@ -57,7 +57,7 @@ export const Supported_Langs = [
   { identifier: "spanish", name: "Spanish" },
 ];
 
-export const OPENAI_KEY = "AIzaSyDna0FzcQtijWXrZ4JCbm_fUQlz51ga3w4";
+export const OPENAI_KEY = import.meta.env.VITE_OPENAI_KEY;
 
 export const GPTQuery = "Assume you are a movie recommendation system.Suggest some movies for the query :";
 

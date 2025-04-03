@@ -1,11 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { act } from "react";
 
 const userSlice = createSlice({
   name: "user",
-  initialState: null,
+  initialState: {
+    API_KEY: null,
+  },
   reducers: {
     addUser: (state, action) => {
       return action.payload;
+    },
+    addAPI_KEY: (state, action) => {
+      state.API_KEY = action.payload;
+    },
+    removeAPI_KEY: (state,action) => {
+      state.API_KEY = null;
     },
     removeUser: (state, action) => {
       state = null;
@@ -15,6 +24,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { addUser, removeUser } = userSlice.actions;
+export const { addUser, removeUser, addAPI_KEY, removeAPI_KEY } = userSlice.actions;
 
 export default userSlice.reducer;
