@@ -24,7 +24,6 @@ Netflix GPT is a modern movie streaming web application that emulates the Netfli
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/) installed on your machine.
-- A Firebase project set up for authentication.
 - TMDB API key.
 - Gemini API key.
 
