@@ -1,25 +1,74 @@
 # Netflix GPT
 
-- I have created it using vite. It is purely a React Project to run this project on your local machine you can clone this first and then run the script npm start to run the project. Then go on your browser and visit http://localhost:5173/ to see the website. I have used firebase for authentication, so you need to make an account and then you will be able to access the website.
+Netflix GPT is a modern movie streaming web application that emulates the Netflix experience while integrating AI-powered movie recommendations using Gemini AI technology. Built with React and Vite, it offers a seamless and responsive user interface.
 
-After creating your account you will be able to see list of movies and then you can also access a very cool feature of this project which i have built using Gemini API's by clicking Gpt search button on the header you ask for movie suggestions from the gemini by just typing the genre you need to watch. but before that you need to generate an API key for gemini from google ai studio website - https://aistudio.google.com/app/apikey
+## 🔥 Features
 
-then you need to copy the generated key inside the API key input box and hit enter then enter the genre in the what do you want to watch today input box and hit search. it will suggest you the desired movies. 
+- **User Authentication**: Secure login and signup functionality powered by Firebase Authentication.
+- **Movie Browsing**: Explore a curated list of movies fetched from The Movie Database (TMDB) API.
+- **AI-Powered Recommendations**: Utilize Gemini to receive personalized movie suggestions based on user preferences.
+- **Responsive Design**: Optimized for various devices to ensure a consistent user experience.
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) installed on your machine.
+- A Firebase project set up for authentication.
+- TMDB API key.
+- Gemini API key.
+
+### Installation
+
+1. **Clone the repository**:
+
+   ```bash
+   git clone https://github.com/anujkamaljain/Netflix-Gpt-Project.git
+   cd Netflix-Gpt-Project
+   ```
 
 
-# Features / Skeleton of Project
-- Login/Signup 
-   - SignIn/SignUp Form
-   - redirect to Browse Page
-- Browse (after Login authentication)
-   - Header
-   - Main Movie
-      - Trailer in Background
-      - Title and Description
-      - Movie Suggestions
-         - MovieLists * N (horizontally scrollable)
-- Netflix GPT
-    - Search Bar
-    - Movie Suggestions
+2. **Install dependencies**:
+
+   ```bash
+   npm install
+   ```
+
+3. **Start the server**:
+
+   ```bash
+   npm start
+   ```
 
 
+   The application will be available at [http://localhost:5173](http://localhost:5173).
+
+## 🛠️ Technologies Used
+
+- **React**: JavaScript library for building user interfaces.
+- **Vite**: Next-generation frontend tooling for fast development.
+- **Firebase**: Backend-as-a-Service for authentication and hosting.
+- **TMDB API**: Provides movie data for browsing.
+- **Gemini **: Powers the AI-based movie recommendation feature.
+
+## 📁 Project Structure
+
+
+```plaintext
+Netflix-Gpt-Project/
+├── .firebase/               # Firebase configuration
+├── build/                   # Production build files
+├── src/                     # Source code
+│   ├── components/          # Reusable React components
+│   ├── pages/               # Page components
+│   ├── services/            # API service modules
+│   ├── App.jsx              # Root component
+│   └── main.jsx             # Entry point
+├── .firebaserc              # Firebase project configuration
+├── .gitignore               # Git ignore rules
+├── firebase.json            # Firebase hosting configuration
+├── index.html               # HTML template
+├── package.json             # Project metadata and dependencies
+├── vite.config.js           # Vite configuration
+└── README.md                # Project documentation
+```
