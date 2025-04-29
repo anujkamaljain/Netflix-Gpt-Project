@@ -9,6 +9,16 @@ Netflix GPT is a modern movie streaming web application that emulates the Netfli
 - **AI-Powered Recommendations**: Utilize Gemini to receive personalized movie suggestions based on user preferences.
 - **Responsive Design**: Optimized for various devices to ensure a consistent user experience.
 
+![Screenshot 2025-04-30 040956](https://github.com/user-attachments/assets/073d9c8c-002f-41d7-af46-fe82ba89e071)
+
+![Screenshot 2025-04-30 041007](https://github.com/user-attachments/assets/534e8bc1-dcc8-428e-982d-6f35e300ebb9)
+
+![Screenshot 2025-04-30 041022](https://github.com/user-attachments/assets/9be3640b-8e28-439b-893f-5a5cda281483)
+
+![Screenshot 2025-04-30 041119](https://github.com/user-attachments/assets/8161955b-80ba-4300-8e78-5a4c49d15c29)
+
+![Screenshot 2025-04-30 041148](https://github.com/user-attachments/assets/d9cd0a35-3382-48d1-9d3c-6856dbc96aba)
+
 ## 🚀 Getting Started
 
 ### Prerequisites
